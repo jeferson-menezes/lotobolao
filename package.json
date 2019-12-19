@@ -44,7 +44,26 @@
       "plugin:vue/essential",
       "@vue/standard"
     ],
-    "rules": {},
+    "rules": {
+      "quotes": [
+        "error",
+        "single"
+      ],
+      "semi": [
+        "error",
+        "always"
+      ],
+      "space-before-function-paren": [
+        "error",
+        "never"
+      ],
+      "no-duplicate-imports": [
+        "error",
+        {
+          "includeExports": true
+        }
+      ]
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }

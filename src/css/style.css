@@ -1,0 +1,44 @@
+.ABERTA {
+    background-color: #4fc3f7;
+    color: #ffffff;
+  }
+  .TEXT--ABERTA {
+    color: #4fc3f7 !important;
+  }
+  
+  .TEXT--FECHADA {
+    color: #f4511e !important;
+  }
+  .FECHADA {
+    background-color: #f4511e;
+    color: #ffffff;
+  }
+  
+  .TEXT--PAGA {
+    color: #76ff03 !important;
+  }
+  .PAGA {
+    background-color: #76ff03;
+    color: #ffffff;
+  }
+  
+  .TEXT--VENCIDA {
+    color: #d50000 !important;
+  }
+  .VENCIDA {
+    background-color: #d50000;
+    color: #ffffff;
+  }
+  
+  .TEXT--FUTURA {
+    color: #ffa000 !important;
+  }
+  .FUTURA {
+    background-color: #ffa000;
+    color: #ffffff;
+  }
+
+  .v-btn--fab.v-size--default {
+    height: 37px;
+    min-width: 37px;
+}
