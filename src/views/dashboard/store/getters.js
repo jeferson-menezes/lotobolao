@@ -1,1 +1,1 @@
-// export const hasBolaoId = ({ bolao }) => !!bolao.id;
+export const hasConcurso = ({ concurso }) => !!Object.values(concurso).length;

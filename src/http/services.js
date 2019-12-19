@@ -1,5 +1,5 @@
-import { services as home } from "../views/home";
+import { services as dashboard } from '../views/dashboard';
 
 export default {
-  home
+  dashboard
 };

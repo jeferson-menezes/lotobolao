@@ -1,4 +1,5 @@
 export default {
-  boloes: [],
-  bolao: {}
+  participantes: [],
+  participante: {},
+  dezenas: []
 };

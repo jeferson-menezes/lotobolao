@@ -1,4 +1,4 @@
-const jogos = [{ id: 1, nome: 'Mega-sena' }, { id: 2, nome: 'Loto-fácil' }];
+const jogos = [{ id: 1, nome: 'Mega-Sena' }, { id: 2, nome: 'Lotofácil' }, { id: 2, nome: 'Lotomania' }];
 const dezanasMega = [
   { dezena: 1, texto: '01' }, { dezena: 2, texto: '02' }, { dezena: 3, texto: '03' }, { dezena: 4, texto: '04' }, { dezena: 5, texto: '05' }, { dezena: 6, texto: '06' }, { dezena: 7, texto: '07' }, { dezena: 8, texto: '08' }, { dezena: 9, texto: '09' }, { dezena: 10, texto: '10' },
   { dezena: 11, texto: '11' }, { dezena: 12, texto: '12' }, { dezena: 13, texto: '13' }, { dezena: 14, texto: '14' }, { dezena: 15, texto: '15' }, { dezena: 16, texto: '16' }, { dezena: 17, texto: '17' }, { dezena: 18, texto: '18' }, { dezena: 19, texto: '19' }, { dezena: 20, texto: '20' },

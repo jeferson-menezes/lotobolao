@@ -1,10 +1,10 @@
-// import * as types from './mutation-types';
+import * as types from './mutation-types';
 
-// export default {
-//   [types.SET_BOLOES](state, payload) {
-//     state.boloes = payload;
-//   },
-//   [types.SET_BOLAO](state, payload) {
-//     state.bolao = payload;
-//   }
-// };
+export default {
+  [types.SET_PARTICIPANTES](state, payload) {
+    state.participantes = payload;
+  },
+  [types.SET_DEZENAS](state, payload) {
+    state.dezenas = payload;
+  }
+};
