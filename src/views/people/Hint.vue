@@ -6,19 +6,23 @@
       </v-flex>
       <v-flex xs12>
         <v-card>
-          <v-card-title
+          <v-card-title justif="center"
             primary-title
-          >{{participante.nome || 'Não foi selecionado um participante !' }}</v-card-title>
+          >{{participante.nome || 'Não foi selecionado um participante !' }}
+          </v-card-title>
+          <v-card-subtitle>
+            Subtitulo aqui
+          </v-card-subtitle>
         </v-card>
       </v-flex>
     </v-layout>
 
     <v-layout row wrap>
-      <v-btn-toggle color="primary" :max="bolao.dezenas" dense v-model="toggle_dezenas" multiple>
+      <v-btn-toggle :max="bolao.dezenas" dense v-model="toggle_dezenas" multiple>
         <v-row align="center" justify="center">
           <template v-for="d in dezenas">
             <v-col :key="d.dezena">
-              <v-btn dark>{{d.texto}}</v-btn>
+              <v-btn>{{d.texto}}</v-btn>
             </v-col>
             <v-responsive v-if="d.dezena % 10 === 0" :key="`width-${d.dezena - 10}`" width="100%"></v-responsive>
           </template>
@@ -109,10 +113,6 @@ export default {
   mounted() {
     this.idParte = this.setId();
     this.ActionGetParticipanteForId(this.idParte);
-    this.$root.$emit('Notification::show', {
-      tipo: 'info',
-      message: 'Você pode selecionar as dezenas que serão sorteadas!'
-    });
   }
 };
 </script>

@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <v-alert tile
-      class="alert"
+  <div class="alert">
+    <v-alert
+      dense
       :value="show"
       :type="tipo"
-      dismissible
-      transition="slide-x-transition"
       border="left"
     >{{ message }}</v-alert>
   </div>
@@ -52,6 +50,5 @@ export default {
   z-index: 10000;
   left: 40px;
   bottom: 40px;
-  max-width: 350px;
 }
 </style>
