@@ -1,2 +1,2 @@
-export const SET_BOLOES = 'CONFIG/SET_BOLOES';
-export const SET_BOLAO = 'CONFIG/SET_BOLAO';
+export const SET_BOLOES = 'GAME/SET_BOLOES';
+export const SET_BOLAO = 'GAME/SET_BOLAO';

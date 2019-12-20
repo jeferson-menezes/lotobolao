@@ -79,7 +79,7 @@ import DatePicker from '../../components/global/DatePicker';
 import TimePicker from '../../components/global/TimePicker';
 
 export default {
-  name: 'Config',
+  name: 'NewGame',
   data: () => ({
     bolao: {
       nome: '',

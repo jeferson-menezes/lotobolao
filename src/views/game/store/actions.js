@@ -23,20 +23,24 @@ export const ActionSelecionaBolao = ({ commit }, payload) => {
   local.setBolao(payload);
 };
 
+export const ActionDescelecionaBolao = ({ commit }) => {
+  commit(types.SET_BOLAO, {});
+  local.setBolao('');
+};
+
 export const ActionAddBolao = ({ commit }, bolao) => {
   return new Promise((resolve, reject) => {
     const ref = firestore.collection('bolao_db').doc();
     ref.set(bolao).then(e => {
-      console.log('Res ', e);
       resolve(e);
     }).catch(er => {
       reject(er);
-      console.log('Err ', er);
+      console.log(er);
     });
   });
 };
 
-export const ActionListaBoloes = ({ commit }) => {
+export const ActionListaBoloes = ({ dispatch }) => {
   let lista = [];
   let obj = {};
 
@@ -46,14 +50,16 @@ export const ActionListaBoloes = ({ commit }) => {
         obj = doc.data();
         obj.id = doc.id;
         lista.push(obj);
-        console.log();
       });
-      commit(types.SET_BOLOES, lista);
+      dispatch('ActionSetBoloes', lista);
     }).catch(err => {
-      console.log('Erro ao buscar os bolões', err);
+      console.log(err);
     });
 };
 
+export const ActionSetBoloes = ({ commit }, payload) => {
+  commit(types.SET_BOLOES, payload);
+};
 // Storage
 
 export const ActionUploadFile = ({ commit }, payload) => {

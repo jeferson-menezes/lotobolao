@@ -8,7 +8,7 @@ export default [
   {
     path: '/listGame',
     name: 'listGame',
-    meta: { icon: 'fa-list', title: 'Lista' },
+    meta: { icon: 'mdi-view-grid', title: 'Bolões' },
     component: () => import(/* webpackChunkName: "index" */ './ListGame')
   }
 ];

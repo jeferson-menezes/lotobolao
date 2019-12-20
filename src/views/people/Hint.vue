@@ -14,7 +14,7 @@
     </v-layout>
 
     <v-layout row wrap>
-      <v-btn-toggle color="primary" max="10" dense v-model="toggle_dezenas" multiple>
+      <v-btn-toggle color="primary" :max="bolao.dezenas" dense v-model="toggle_dezenas" multiple>
         <v-row align="center" justify="center">
           <template v-for="d in dezenas">
             <v-col :key="d.dezena">
@@ -42,11 +42,11 @@
 </template>
 <script>
 import { mapActions, mapState } from 'vuex';
-import { getDezenasMega } from '../../data/jogos';
+import { getDezenasMega } from '../../js/data/jogos';
 import ResultadoDezenas from '../../components/loteria/ResultadoDezenas';
 
 export default {
-  name: 'Dezenas',
+  name: 'Hint',
   data: () => ({
     toggle_dezenas: [],
     selected_dezenas: [],

@@ -1,7 +1,7 @@
 <template>
-  <v-container grid-list-xs>
-    <v-layout row justify-space-around grid-list-sm>
-      <v-flex xs12 sm8 md5 lg5 class="ma-1" v-for="bolao in boloes" :key="bolao.concurso">
+  <v-container>
+    <v-layout row justify-space-around >
+      <v-flex xs12 sm10 md5 lg6 xl4 class="ma-1" v-for="(bolao, i) in boloes" :key="i">
         <v-card flet tile @click="selectBolao(bolao)">
           <v-card-title primary-title>
             {{bolao.nome}}
@@ -31,7 +31,7 @@ import { mapState, mapActions } from 'vuex';
 import { real } from '../../js/helper/currency';
 
 export default {
-  name: 'Index',
+  name: 'ListGame',
   data: () => ({}),
   methods: {
     ...mapActions('game', ['ActionListaBoloes', 'ActionSelecionaBolao']),

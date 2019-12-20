@@ -2,19 +2,19 @@ export default [
   {
     path: '/enter',
     name: 'enter',
-    meta: { icon: 'fa-cogs', title: 'Participar' },
+    meta: { icon: 'mdi-clover', title: 'Participar' },
     component: () => import(/* webpackChunkName: "enter" */ './EnterPeople')
   },
   {
     path: '/list',
     name: 'list',
-    meta: { icon: 'fa-list', title: 'Participantes' },
+    meta: { icon: 'mdi-account-group', title: 'Participantes' },
     component: () => import(/* webpackChunkName: "list" */ './ListPeople')
   },
   {
-    path: '/dozens/:id',
-    name: 'dozens',
-    meta: { icon: 'fa-th', title: 'Dezenas' },
-    component: () => import(/* webpackChunkName: "dozens" */ './Dozens')
+    path: '/hint/:id',
+    name: 'hint',
+    meta: { icon: 'mdi-horseshoe', title: 'Palpite' },
+    component: () => import(/* webpackChunkName: "hint" */ './Hint')
   }
 ];

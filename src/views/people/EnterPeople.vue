@@ -4,7 +4,7 @@
       <v-flex xs12>
         <v-card>
           <v-form @submit.prevent="submit()">
-            <v-card-title class="justify-center headline">Partipar do bolão</v-card-title>
+            <v-card-title class="justify-center headline">Participar do bolão</v-card-title>
             <v-card-text>
               <v-container grid-list-md>
                 <v-layout wrap>
@@ -17,7 +17,7 @@
                   <v-flex xs6>
                     <v-text-field
                       v-model="form.parte"
-                      label="Quantas parte do bolão?"
+                      label="Quantas partes do bolão?"
                       type="number"
                     ></v-text-field>
                   </v-flex>
@@ -41,7 +41,7 @@ import { mapActions, mapState } from 'vuex';
 import SelectorImage from '../../components/global/SelectorImage';
 
 export default {
-  name: 'Participar',
+  name: 'EnterPeople',
   components: {
     SelectorImage
   },
@@ -85,7 +85,7 @@ export default {
               });
               this.limpaForm();
               console.log('Retorno', res);
-              this.$router.push({ name: 'dozens', params: { id: res } });
+              this.$router.push({ name: 'hint', params: { id: res } });
             })
             .catch(err => {
               console.log(err);

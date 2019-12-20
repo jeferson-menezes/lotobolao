@@ -26,7 +26,7 @@
 import { mapActions } from 'vuex';
 
 export default {
-  name: 'SeletorImagem',
+  name: 'SelectorImage',
   props: ['folder'],
   data: () => ({
     load: false,

@@ -19,7 +19,7 @@
  * error
  */
 export default {
-  name: 'AlertaNotificacao',
+  name: 'SweetAlert',
   data: () => ({
     show: false,
     message: '',

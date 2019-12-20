@@ -25,15 +25,18 @@ export const ActionSetParticipantes = ({ commit }, payload) => {
 };
 
 export const ActionDezenasMais = ({ state, commit, getters }) => {
-  const bolao = local.getBolao();
   const arr = getters.palpites;
+  if (!arr) {
+    return;
+  }
+  const bolao = local.getBolao();
   const dezenas = arr.map(e => e.d).slice(0, +bolao.dezenas);
   commit(types.SET_DEZENAS, dezenas);
 };
 
 export const ActionEntrarNoBolao = ({ commit }, bolao) => {
   const pessoaRef = firestore.collection('participante');
-  return pessoaRef.add(bolao).then(res => res.id).catch(err => console.log('Err ', err));
+  return pessoaRef.add(bolao).then(res => res.id).catch(err => console.log(err));
 };
 
 export const ActionGetParticipante = ({ commit }, payload) => {
@@ -51,8 +54,6 @@ export const ActionGetParticipanteForId = ({ commit }, id) => {
     if (doc.exists) {
       let obj = doc.data();
       obj.id = doc.id;
-      console.log('Pessoa ', obj);
-
       commit(types.SET_PARTICIPANTE, obj);
     }
   }).catch(console.log);
@@ -62,6 +63,6 @@ export const ActionAddDezenas = ({ commit }, payload) => {
   const ref = firestore.collection('participante').doc(payload.id);
 
   return ref.set({ dezenas: payload.dezenas }, { merge: true })
-    .then(res => console.log(res))
+    .then()
     .catch(err => console.log(err));
 };
