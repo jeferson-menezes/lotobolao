@@ -6,5 +6,8 @@ export default {
   },
   [types.SET_BOLAO](state, payload) {
     state.bolao = payload;
+  },
+  [types.SET_PROGRESS](state, payload) {
+    state.progress = payload;
   }
 };

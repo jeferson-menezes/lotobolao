@@ -1,18 +1,16 @@
 <template>
   <v-container>
-    <v-layout row wrap ma-5>
+    <v-layout row wrap mb-2>
       <v-flex xs12>
         <title>Cadastrar palpites</title>
       </v-flex>
       <v-flex xs12>
         <v-card>
-          <v-card-title justif="center"
+          <v-card-title
+            justif="center"
             primary-title
-          >{{participante.nome || 'Não foi selecionado um participante !' }}
-          </v-card-title>
-          <v-card-subtitle>
-            Subtitulo aqui
-          </v-card-subtitle>
+          >{{participante.nome || 'Não foi selecionado um participante !' }}</v-card-title>
+          <v-card-subtitle>Informe as suas dezenas e clique em salvar.</v-card-subtitle>
         </v-card>
       </v-flex>
     </v-layout>
@@ -21,8 +19,8 @@
       <v-btn-toggle :max="bolao.dezenas" dense v-model="toggle_dezenas" multiple>
         <v-row align="center" justify="center">
           <template v-for="d in dezenas">
-            <v-col :key="d.dezena">
-              <v-btn>{{d.texto}}</v-btn>
+            <v-col :key="d.texto">
+              <v-btn>{{d.texto }}</v-btn>
             </v-col>
             <v-responsive v-if="d.dezena % 10 === 0" :key="`width-${d.dezena - 10}`" width="100%"></v-responsive>
           </template>
@@ -46,7 +44,7 @@
 </template>
 <script>
 import { mapActions, mapState } from 'vuex';
-import { getDezenasMega } from '../../js/data/jogos';
+import { getDezenasMega, getDezenasTexto } from '../../js/data/jogos';
 import ResultadoDezenas from '../../components/loteria/ResultadoDezenas';
 
 export default {
@@ -81,12 +79,13 @@ export default {
         });
         return;
       }
-
+      this.$root.$emit('Loading::show');
       this.ActionAddDezenas({
         dezenas: this.selected_dezenas,
         id: this.participante.id
       })
         .then(res => {
+          this.$root.$emit('Loading::hide');
           this.$root.$emit('Notification::show', {
             tipo: 'success',
             message: 'Palpite cadastrado com sucesso!'
@@ -96,6 +95,7 @@ export default {
         })
         .catch(err => {
           console.log(err);
+          this.$root.$emit('Loading::hide');
           this.$root.$emit('Notification::show', {
             tipo: 'error',
             message: 'Houve um erro ao adicionar o palpite!'
@@ -106,13 +106,23 @@ export default {
       return this.$route.params.id;
     },
     updateSelect() {
-      this.selected_dezenas = this.toggle_dezenas.map(e => e + 1);
+      this.selected_dezenas = getDezenasTexto(
+        this.toggle_dezenas.map(e => e + 1)
+      );
       return this.selected_dezenas;
     }
   },
   mounted() {
     this.idParte = this.setId();
-    this.ActionGetParticipanteForId(this.idParte);
+    this.$root.$emit('Loading::show');
+    this.ActionGetParticipanteForId(this.idParte)
+      .then(e => {
+        this.$root.$emit('Loading::hide');
+      })
+      .catch(err => {
+        console.log(err);
+        this.$root.$emit('Loading::hide');
+      });
   }
 };
 </script>

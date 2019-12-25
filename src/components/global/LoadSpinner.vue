@@ -1,38 +1,37 @@
 <template>
-  <div class="spinner" v-if="visible">
-    <v-progress-circular :size="50" color="blue" indeterminate></v-progress-circular>
-  </div>
+  <v-dialog class="loading" v-model="visible" hide-overlay persistent width="300">
+    <v-card color="primary" dark>
+      <v-card-text>
+        <span class="justify-center">Por favor espere...</span>
+        <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+      </v-card-text>
+    </v-card>
+  </v-dialog>
 </template>
+
 <script>
 export default {
-  name: 'LoadSpinner',
-  data: () => ({
-    visible: true
-  }),
+  data() {
+    return {
+      visible: false
+    };
+  },
   created() {
-    this.$root.$on('Spinner::show', () => {
+    this.$root.$on('Loading::show', () => {
       this.visible = true;
     });
-    this.$root.$on('Spinner::hide', () => {
+    this.$root.$on('Loading::hide', () => {
       this.visible = false;
     });
   }
 };
 </script>
+
 <style scoped>
-/* .spinner {
+.loading {
   top: 0 !important;
-  bottom: 0 !important;
   right: 0 !important;
-  left: 0 !important;
-  z-index: 50000;
   position: absolute;
-  width: 100vw !important;
-  height: 100vh !important;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #32325db8;
-  filter: blur(1px);
-} */
+}
 </style>

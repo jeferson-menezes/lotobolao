@@ -1,6 +1,5 @@
 import * as types from './mutation-types';
 import services from '@/http';
-
 export const ActionResultadoConcurso = ({ commit }, concurso) => {
   services.dashboard.megasenaPorConcurso({ concurso: concurso })
     .then(res => res.json())

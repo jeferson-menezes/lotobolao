@@ -48,21 +48,36 @@ export const ActionGetParticipante = ({ commit }, payload) => {
 };
 
 export const ActionGetParticipanteForId = ({ commit }, id) => {
+  if (!id) {
+    return;
+  }
   const ref = firestore.collection('participante').doc(id);
 
-  ref.get().then(doc => {
+  return ref.get().then(doc => {
     if (doc.exists) {
       let obj = doc.data();
       obj.id = doc.id;
       commit(types.SET_PARTICIPANTE, obj);
     }
-  }).catch(console.log);
+  }).catch(err => {
+    commit(types.SET_PARTICIPANTE, {});
+    console.log(err);
+  }
+  );
 };
 
 export const ActionAddDezenas = ({ commit }, payload) => {
   const ref = firestore.collection('participante').doc(payload.id);
 
   return ref.set({ dezenas: payload.dezenas }, { merge: true })
+    .then()
+    .catch(err => console.log(err));
+};
+
+export const ActionAddImagens = ({ commit }, payload) => {
+  const ref = firestore.collection('participante').doc(payload.id);
+
+  return ref.set({ arquivos: payload.arquivos, pago: true }, { merge: true })
     .then()
     .catch(err => console.log(err));
 };

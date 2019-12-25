@@ -1,6 +1,7 @@
 <template>
   <v-app id="inspire">
     <sweet-alert></sweet-alert>
+    <load-spinner></load-spinner>
     <v-navigation-drawer v-model="drawer" app clipped v-if="hasBolaoId()">
       <v-list dense>
         <v-list-item v-for="(item, index) in routerLinks" :key="index" :to="item.path" link>
@@ -32,10 +33,10 @@
       </v-container>
     </v-content>
 
-    <v-footer app >
-      <span class="text-center font-weight-thin ma-0 pa-0">
-        &copy; 2019 - Jeferson Menezes
-      </span>
+    <v-footer app>
+      <v-row align="center" justify="center">
+        <p align="center" class="text-center font-weight-thin ma-0 pa-0">&copy; 2019 - Jeferson Menezes</p>
+      </v-row>
     </v-footer>
   </v-app>
 </template>
@@ -43,13 +44,15 @@
 <script>
 import SweetAlert from './components/global/SweetAlert';
 import UpdateBolao from './components/loteria/UpdateBolao';
+import LoadSpinner from './components/global/LoadSpinner';
 import { mapGetters } from 'vuex';
 
 export default {
   name: 'App',
   components: {
     SweetAlert,
-    UpdateBolao
+    UpdateBolao,
+    LoadSpinner
   },
   data: () => ({
     drawer: null
@@ -60,7 +63,7 @@ export default {
   computed: {
     routerLinks() {
       return this.$router.options.routes.filter(
-        r => r.name !== 'hint' && r.name !== 'game'
+        r => r.name !== 'hint' && r.name !== 'game' && r.name !== 'listGame'
       );
     }
   },

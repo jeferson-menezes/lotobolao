@@ -1,3 +1,4 @@
+/* eslint-disable prefer-promise-reject-errors */
 import * as types from './mutation-types';
 import * as local from '../local';
 import { firestore, storage } from '@/firebase';
@@ -15,7 +16,27 @@ export const ActionChecaBolao = ({ dispatch, state }) => {
 
   dispatch('ActionSelecionaBolao', bolao);
 
-  return Promise.resolve();
+  return dispatch('ActionLoadBolao', bolao.id);
+};
+
+export const ActionLoadBolao = ({ dispatch }, payload) => {
+  return new Promise(async(resolve, reject) => {
+    const ref = firestore.collection('bolao_db').doc(payload);
+    ref.get().then(doc => {
+      if (doc.exists) {
+        let obj = doc.data();
+        obj.id = doc.id;
+        dispatch('ActionSelecionaBolao', obj);
+        resolve();
+      } else {
+        dispatch('ActionDescelecionaBolao');
+        reject('Bolão não localizado');
+      }
+    }).catch(err => {
+      dispatch('ActionDescelecionaBolao');
+      reject(err);
+    });
+  });
 };
 
 export const ActionSelecionaBolao = ({ commit }, payload) => {
@@ -60,22 +81,27 @@ export const ActionListaBoloes = ({ dispatch }) => {
 export const ActionSetBoloes = ({ commit }, payload) => {
   commit(types.SET_BOLOES, payload);
 };
-// Storage
 
+// Storage
 export const ActionUploadFile = ({ commit }, payload) => {
-  console.log(payload);
   return new Promise((resolve, reject) => {
     const random = Math.random();
 
     let storageRef = storage.ref(`${payload.ref}/${random}_${payload.file.name}`);
 
-    storageRef.put(payload.file)
-      .then(snapshot => console.log('Enviando: ', snapshot)).then(() => storageRef.getDownloadURL())
-      .then(url => resolve(url))
-      .catch(erro => {
-        console.log(erro);
-        reject(erro);
-      });
+    let uploadTask = storageRef.put(payload.file);
+
+    uploadTask.on('state_changed', snapshot => {
+      let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      commit(types.SET_PROGRESS, progress);
+    }, erro => {
+      console.log(erro);
+      reject(erro);
+    }, () => {
+      uploadTask.snapshot.ref.getDownloadURL().then(url => {
+        resolve(url);
+      }).catch(err => reject(err));
+    });
   });
 };
 

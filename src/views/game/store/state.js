@@ -1,4 +1,5 @@
 export default {
   bolao: {},
-  boloes: []
+  boloes: [],
+  progress: 0
 };

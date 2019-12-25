@@ -1,10 +1,10 @@
 <template>
   <v-layout row wrap>
     <v-flex xs10>
-      <v-file-input @change="uploadImage" label="Se tiver comprovantes anexar"></v-file-input>
+      <v-file-input @change="uploadImage" v-model="file" clearable label="Se tiver comprovantes anexar"></v-file-input>
     </v-flex>
     <v-flex xs2>
-      <v-progress-circular v-if="load" indeterminate color="green"></v-progress-circular>
+      <v-progress-circular v-if="load" width="3" size="40" indeterminate color="green">{{progress + '%'}}</v-progress-circular>
     </v-flex>
     <v-flex xs12>
       <v-container>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'SelectorImage',
@@ -42,14 +42,12 @@ export default {
 
       this.load = true;
 
-      console.log('Target ', file);
-
       this.ActionUploadFile({ file: file, ref: this.folder })
         .then(res => {
-          // console.log("Res", res);
           this.images.push({ url: res });
           this.getImages();
           this.load = false;
+          this.file = null;
         })
         .catch(err => {
           console.log(err);
@@ -68,7 +66,6 @@ export default {
 
       this.ActionDeleteFile(imageUrl)
         .then(res => {
-          console.log('Res', res);
           this.getImages();
           this.load = false;
         })
@@ -79,9 +76,14 @@ export default {
       this.$emit('images-selecionadas', this.images);
     }
   },
+  computed: {
+    ...mapState('game', ['progress'])
+  },
   created() {
     this.$root.$on('Images::delete', () => {
-      this.ActionDeleteFileAll(this.images);
+      this.ActionDeleteFileAll(this.images).then(res => {
+        this.images = [];
+      });
     });
   }
 };

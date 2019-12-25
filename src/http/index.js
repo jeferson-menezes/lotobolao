@@ -6,7 +6,7 @@ Vue.use(VueResource);
 
 const http = Vue.http;
 
-http.options.root = 'http://confiraloterias.com.br/api0/';
+http.options.root = 'https://confiraloterias.com.br/api0/';
 
 Object.keys(services).map(service => {
   services[service] = Vue.resource('', {}, services[service]);

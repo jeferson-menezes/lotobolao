@@ -3,24 +3,20 @@
     <v-layout row wrap mb-2>
       <v-flex xs12>
         <v-card outlined tile>
-          <v-card-title class="justify-center headline">Informações do bolão {{bolao.nome}}</v-card-title>
+          <v-card-title class="justify-center title">Informações do bolão {{bolao.nome}}</v-card-title>
+          <v-card-subtitle>Sorteio em {{bolao.data | moment("DD/MM/YYYY")}} {{bolao.hora}}</v-card-subtitle>
           <v-card-text>
-            <v-list-item three-line centered>
-              <v-list-item-content>
-                <v-list-item-title>Sorteio em {{bolao.data | moment("DD/MM/YYYY")}} {{bolao.hora}}</v-list-item-title>
-                <v-list-item-subtitle
-                  v-if="bolao.unica"
-                >{{'Aposta única de ' + real(bolao.valor)}} {{" de " + bolao.dezenas + " dezenas"}}</v-list-item-subtitle>
-                <v-list-item-subtitle>
-                  <strong>Descrição:</strong>
-                  {{bolao.observacao}}
-                </v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
+            <p
+              v-if="bolao.unica"
+            >{{'Aposta única de ' + real(bolao.valor)}} {{" de " + bolao.dezenas + " dezenas"}}</p>
+            <p class="text-justify">
+              <strong>Descrição:</strong>
+              {{bolao.observacao}}
+            </p>
           </v-card-text>
-          <v-card-title>Dezenas mais escolhidas nos palpites</v-card-title>
+          <v-card-title class="justify-center subtitle-1">Dezenas mais escolhidas nos palpites</v-card-title>
           <v-card-actions>
-            <resultado-dezenas cor="primary" :dezenas="dezenas" />
+            <resultado-dezenas cor="warning" :dezenas="dezenas" />
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -30,7 +26,7 @@
       <v-flex xs12>
         <v-card outlined tile>
           <v-card-title
-            class="justify-center headline"
+            class="justify-center title"
           >Informações do sorteio concurso {{bolao.concurso}}</v-card-title>
           <template v-if="hasConcurso()">
             <v-card-text>
@@ -55,21 +51,27 @@
 
     <v-layout row wrap mb-2>
       <v-flex xs12>
-        <v-card >
+        <v-card>
           <v-layout row wrap>
             <v-flex xs12>
-              <v-card-title class="justify-center headline">Resultado</v-card-title>
+              <v-card-title class="justify-center title">Resultado</v-card-title>
             </v-flex>
             <v-flex xs12 sm12 md6 lg6>
-              <v-card-title>Dezenas acertadas</v-card-title>
+              <v-card-title class="justify-center subtitle-1">Dezenas acertadas</v-card-title>
               <v-card-text>
-                <resultado-dezenas cor="success" :dezenas="acertados(dezenas || [], concurso.dezenas || [])" />
+                <resultado-dezenas
+                  cor="success"
+                  :dezenas="acertados(dezenas || [], concurso.dezenas || [])"
+                />
               </v-card-text>
             </v-flex>
             <v-flex xs12 sm12 md6 lg6>
-              <v-card-title>Dezenas erradas</v-card-title>
+              <v-card-title class="justify-center subtitle-1">Dezenas erradas</v-card-title>
               <v-card-text>
-                <resultado-dezenas cor="error" :dezenas="errados(dezenas || [], concurso.dezenas|| [])" />
+                <resultado-dezenas
+                  cor="error"
+                  :dezenas="errados(dezenas || [], concurso.dezenas|| [])"
+                />
               </v-card-text>
             </v-flex>
           </v-layout>

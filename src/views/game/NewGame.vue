@@ -4,7 +4,7 @@
       <v-flex>
         <v-card class="elevation-1">
           <v-form @submit.prevent="submit()">
-            <v-card-title class="headline">Cadastrar novo bolão</v-card-title>
+            <v-card-title class="justify-center title">Cadastrar novo bolão</v-card-title>
             <v-card-text>
               <v-container grid-list-md>
                 <v-layout wrap>
@@ -16,11 +16,7 @@
                   </v-flex>
 
                   <v-flex xs6>
-                    <v-text-field
-                      v-model="bolao.dezenas"
-                      label="Quantas Dezenas"
-                      type="number"
-                    ></v-text-field>
+                    <v-text-field v-model="bolao.dezenas" label="Quantas Dezenas" type="number"></v-text-field>
                   </v-flex>
 
                   <v-flex xs6>
@@ -39,11 +35,7 @@
                     ></v-select>
                   </v-flex>
                   <v-flex xs12>
-                    <v-textarea
-                      v-model="bolao.observacao"
-                      rows="2"
-                      label="Descrição e observações"
-                    ></v-textarea>
+                    <v-textarea v-model="bolao.observacao" rows="2" label="Descrição e observações"></v-textarea>
                   </v-flex>
 
                   <v-flex xs6>
@@ -111,9 +103,11 @@ export default {
 
       this.bolao.valor = dolar(this.bolao.valor);
       this.bolao.loteria = getLoteria(this.bolao.loteria);
-
+      this.$root.$emit('Loading::show');
       this.ActionAddBolao(this.bolao)
         .then(res => {
+          this.$root.$emit('Loading::hide');
+
           this.$root.$emit('Notification::show', {
             tipo: 'success',
             message: 'Adicionado com sucesso !'
@@ -121,6 +115,8 @@ export default {
         })
         .catch(err => {
           console.log(err);
+
+          this.$root.$emit('Loading::hide');
 
           this.$root.$emit('Notification::show', {
             tipo: 'error',
@@ -157,7 +153,6 @@ export default {
       this.bolao.hora = '';
     },
     convertValor() {
-      console.log(this.bolao.valor);
       this.bolao.valor = real(this.bolao.valor);
     },
     setData(payload) {

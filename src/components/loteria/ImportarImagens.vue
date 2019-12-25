@@ -4,11 +4,11 @@
     <v-dialog v-model="dialog" max-width="500">
       <v-card class="elevation-1">
         <v-form @submit.prevent="submit()">
-          <v-card-title
+          <v-card-title class="elevation-1"
             primary-title
           >{{participante.nome || 'Não foi selecionado um participante !' }}</v-card-title>
-          <v-card-title>
-            <h1 class="display-1">Importar comprovante</h1>
+          <v-card-title class="justify-center headline">
+            Importar comprovante
           </v-card-title>
           <v-card-text>
             <v-container grid-list-md>
@@ -31,9 +31,9 @@
 </template>
 
 <script>
+
 import { mapActions } from 'vuex';
 import SelectorImage from '../global/SelectorImage';
-
 export default {
   name: 'ImportarImagens',
   props: ['participante'],
@@ -45,7 +45,7 @@ export default {
     SelectorImage
   },
   methods: {
-    ...mapActions('enter', ['addImagens']),
+    ...mapActions('people', ['ActionAddImagens']),
     submit() {
       if (!this.participante.id) {
         this.$root.$emit('Notification::show', {
@@ -54,14 +54,12 @@ export default {
         });
         return;
       }
-
-      this.addImagens({ arquivos: this.arquivos, id: this.participante.id })
+      this.ActionAddImagens({ arquivos: this.arquivos, id: this.participante.id })
         .then(res => {
           this.$root.$emit('Notification::show', {
             tipo: 'success',
             message: 'Imagens salva com sucesso!'
           });
-
           this.$router.push({ name: 'home' });
         })
         .catch(err => {

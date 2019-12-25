@@ -67,8 +67,10 @@ export default {
 
       this.form.bolaoId = this.bolao.id;
 
+      this.$root.$emit('Loading::show');
       this.ActionGetParticipante({ nome: this.form.nome, id: this.bolao.id })
         .then(res => {
+          this.$root.$emit('Loading::hide');
           if (res.length) {
             this.$root.$emit('Notification::show', {
               tipo: 'warning',
@@ -77,18 +79,21 @@ export default {
             return;
           }
 
+          this.$root.$emit('Loading::show');
+
           this.ActionEntrarNoBolao(this.form)
             .then(res => {
+              this.$root.$emit('Loading::hide');
               this.$root.$emit('Notification::show', {
                 tipo: 'success',
                 message: 'Participante adicionado com sucesso!'
               });
               this.limpaForm();
-              console.log('Retorno', res);
               this.$router.push({ name: 'hint', params: { id: res } });
             })
             .catch(err => {
               console.log(err);
+              this.$root.$emit('Loading::hide');
               this.$root.$emit('Notification::show', {
                 tipo: 'error',
                 message: 'Houve um erro ao adicionar!'
@@ -97,6 +102,9 @@ export default {
         })
         .catch(err => {
           console.log(err);
+
+          this.$root.$emit('Loading::hide');
+
           this.$root.$emit('Notification::show', {
             tipo: 'error',
             message: 'Erro ao verificar cadastro !'
