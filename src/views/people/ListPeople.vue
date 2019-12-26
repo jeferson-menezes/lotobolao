@@ -12,7 +12,6 @@
         <v-data-table
           :headers="headers"
           :items="participantes"
-          hide-default-footer
           class="elevation-1"
         >
           <template v-slot:item.pago="{item}">
