@@ -5,6 +5,9 @@
       <v-icon right dark>mdi-arrow-left-circle</v-icon>
     </v-btn>
   </div>
+  <div v-else>
+    <span>Selecione um bolão</span>
+  </div>
 </template>
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex';

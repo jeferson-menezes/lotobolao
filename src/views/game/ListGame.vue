@@ -12,7 +12,7 @@
             <v-chip>{{ convertValor(bolao.valor)}}</v-chip>
           </v-card-subtitle>
           <v-card-text>
-            <p class="text-justify"><span class="red--text">Detalhes: </span> {{bolao.observacao}}</p>
+            <p class="text-justify"><span class="red--text">Detalhes: </span> selecione para ver os detalhes...</p>
           </v-card-text>
           <v-card-actions>
             <v-chip label class="ma-2" color="primary" text-color="white">{{bolao.loteria.nome}}</v-chip>

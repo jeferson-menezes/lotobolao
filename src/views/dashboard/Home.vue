@@ -8,10 +8,22 @@
           <v-card-text>
             <p
               v-if="bolao.unica"
-            >{{'Aposta única de ' + real(bolao.valor)}} {{" de " + bolao.dezenas + " dezenas"}}</p>
+            ><v-chip color="primary"> {{'Aposta única de ' + real(bolao.valor)}}</v-chip> {{" de " + bolao.dezenas + " dezenas"}}</p>
             <p class="text-justify">
               <strong>Descrição:</strong>
               {{bolao.observacao}}
+            </p>
+            <p>
+              <v-list subheader three-line>
+                <v-list-item>
+                  <v-list-item-content>
+                    <v-list-item-title>Existem <v-chip color="red"> {{ numPessoas() }} </v-chip> pessoas participando</v-list-item-title>
+                    <v-list-item-subtitle><v-chip color="red"> {{ numPalpitadas() }}</v-chip> já informaram os palpites das dezenas</v-list-item-subtitle>
+                    <v-list-item-subtitle><v-chip color="red">{{ numPagos() }}</v-chip> já informaram ter pago</v-list-item-subtitle>
+                    <v-list-item-subtitle>O valor é de <v-chip color="red">{{ dividir() }}</v-chip> para cada participante</v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
             </p>
           </v-card-text>
           <v-card-title class="justify-center subtitle-1">Dezenas mais escolhidas nos palpites</v-card-title>
@@ -84,7 +96,7 @@
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex';
 import ResultadoDezenas from '../../components/loteria/ResultadoDezenas';
-import { real } from '../../js/helper/currency';
+import { real, divide } from '../../js/helper/currency';
 import { acertos, erros } from '../../js/helper/loteria';
 
 export default {
@@ -96,6 +108,8 @@ export default {
     ...mapActions('dashboard', ['ActionResultadoConcurso']),
     ...mapActions('people', ['ActionListParticipantes']),
     ...mapGetters('dashboard', ['hasConcurso']),
+    ...mapGetters('people', ['numPessoas', 'numPalpitadas', 'numPagos']),
+
     real(valor) {
       return real(valor);
     },
@@ -110,6 +124,9 @@ export default {
         return erros(jogo, result);
       }
       return [];
+    },
+    dividir() {
+      return real(divide(this.bolao.valor, this.numPessoas()));
     }
   },
   computed: {
