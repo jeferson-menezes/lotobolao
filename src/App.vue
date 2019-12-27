@@ -36,6 +36,7 @@
     <v-footer app>
       <v-row align="center" justify="center">
         <p align="center" class="text-center font-weight-thin ma-0 pa-0">&copy; 2019 - Jeferson Menezes</p>
+        <about/>
       </v-row>
     </v-footer>
   </v-app>
@@ -45,6 +46,7 @@
 import SweetAlert from './components/global/SweetAlert';
 import UpdateBolao from './components/loteria/UpdateBolao';
 import LoadSpinner from './components/global/LoadSpinner';
+import About from './components/global/About';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -52,7 +54,8 @@ export default {
   components: {
     SweetAlert,
     UpdateBolao,
-    LoadSpinner
+    LoadSpinner,
+    About
   },
   data: () => ({
     drawer: null

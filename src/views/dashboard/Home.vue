@@ -6,9 +6,10 @@
           <v-card-title class="justify-center title">Informações do bolão {{bolao.nome}}</v-card-title>
           <v-card-subtitle>Sorteio em {{bolao.data | moment("DD/MM/YYYY")}} {{bolao.hora}}</v-card-subtitle>
           <v-card-text>
-            <p
-              v-if="bolao.unica"
-            ><v-chip color="primary"> {{'Aposta única de ' + real(bolao.valor)}}</v-chip> {{" de " + bolao.dezenas + " dezenas"}}</p>
+            <p v-if="bolao.unica">
+              <v-chip color="primary">{{'Aposta única de ' + real(bolao.valor)}}</v-chip>
+              {{" de " + bolao.dezenas + " dezenas"}}
+            </p>
             <p class="text-justify">
               <strong>Descrição:</strong>
               {{bolao.observacao}}
@@ -17,10 +18,20 @@
               <v-list subheader three-line>
                 <v-list-item>
                   <v-list-item-content>
-                    <v-list-item-title>Existem <v-chip color="red"> {{ numPessoas() }} </v-chip> pessoas participando</v-list-item-title>
-                    <v-list-item-subtitle><v-chip color="red"> {{ numPalpitadas() }}</v-chip> já informaram os palpites das dezenas</v-list-item-subtitle>
-                    <v-list-item-subtitle><v-chip color="red">{{ numPagos() }}</v-chip> já informaram ter pago</v-list-item-subtitle>
-                    <v-list-item-subtitle>O valor é de <v-chip color="red">{{ dividir() }}</v-chip> para cada participante</v-list-item-subtitle>
+                    <v-list-item-title>
+                      Existem
+                      <v-chip color="red">{{ numPessoas() }}</v-chip> pessoas participando
+                    </v-list-item-title>
+                    <v-list-item-subtitle>
+                      <v-chip color="red">{{ numPalpitadas() }}</v-chip> já informaram os palpites das dezenas
+                    </v-list-item-subtitle>
+                    <v-list-item-subtitle>
+                      <v-chip color="red">{{ numPagos() }}</v-chip> já informaram ter pago
+                    </v-list-item-subtitle>
+                    <v-list-item-subtitle>
+                      O valor é de
+                      <v-chip color="red">{{ dividir() }}</v-chip> para cada participante
+                    </v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
               </v-list>
@@ -28,7 +39,16 @@
           </v-card-text>
           <v-card-title class="justify-center subtitle-1">Dezenas mais escolhidas nos palpites</v-card-title>
           <v-card-actions>
-            <resultado-dezenas cor="warning" :dezenas="dezenas" />
+            <v-layout row wrap>
+              <v-flex>
+                <span class="font-weight-thin caption">por ordem de escolhas</span>
+                <resultado-dezenas cor="warning" :dezenas="dezenas" />
+              </v-flex>
+              <v-flex>
+                <span class="font-weight-thin caption">por ordem crescente</span>
+                <resultado-dezenas cor="warning" :dezenas="sortAsc(dezenas)" />
+              </v-flex>
+            </v-layout>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -127,6 +147,9 @@ export default {
     },
     dividir() {
       return real(divide(this.bolao.valor, this.numPessoas()));
+    },
+    sortAsc(arr) {
+      return [].concat(arr).sort();
     }
   },
   computed: {

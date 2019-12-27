@@ -29,6 +29,7 @@ export const ActionDezenasMais = ({ state, commit, getters }) => {
   if (!arr) {
     return;
   }
+  local.setDezenas(arr);
   const bolao = local.getBolao();
   const dezenas = arr.map(e => e.d).slice(0, +bolao.dezenas);
   commit(types.SET_DEZENAS, dezenas);
