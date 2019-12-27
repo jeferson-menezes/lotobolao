@@ -64,8 +64,8 @@ export default {
         align: 'left',
         value: 'nome'
       },
-      { text: 'Cotas', value: 'parte' },
-      { text: 'Pago', value: 'pago', sortable: false },
+      { text: 'Cotas', value: 'parte', sortable: false },
+      { text: 'Pago', value: 'pago' },
       { text: 'Palpites', value: 'dezenas', sortable: false },
       { text: 'Arquivos', value: 'arquivos', sortable: false, align: 'left' },
       { text: 'Ações', value: 'action', sortable: false }

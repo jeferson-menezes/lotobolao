@@ -57,6 +57,14 @@ export default {
   methods: {
     ...mapActions('people', ['ActionEntrarNoBolao', 'ActionGetParticipante']),
     submit() {
+      if (this.bolao.inativo) {
+        this.$root.$emit('Notification::show', {
+          tipo: 'error',
+          message: 'O bolão já foi finalizado não é possível participar!'
+        });
+        return;
+      }
+
       if (!this.valid()) {
         this.$root.$emit('Notification::show', {
           tipo: 'warning',

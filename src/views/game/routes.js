@@ -10,5 +10,11 @@ export default [
     name: 'listGame',
     meta: { icon: 'mdi-view-grid', title: 'Bolões' },
     component: () => import(/* webpackChunkName: "index" */ './ListGame')
+  },
+  {
+    path: '/pay',
+    name: 'pay',
+    meta: { icon: 'mdi-cash-usd', title: 'Pagamento' },
+    component: () => import(/* webpackChunkName: "pay" */ './Pay')
   }
 ];

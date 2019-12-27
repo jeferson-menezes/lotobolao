@@ -34,16 +34,19 @@
       </v-flex>
     </v-layout>
     <v-layout ma-5>
-      <v-flex>
+      <v-flex v-if="deixaAlterar()">
         <v-col align="center" justify="center" cols="12">
           <v-btn :disabled="!selecionouTudo" @click="submit()" color="success">Salvar</v-btn>
         </v-col>
+      </v-flex>
+      <v-flex v-else>
+        <span class="red--text">Não é mais possível alterar as dezenas, o jogo já foi finalizado</span>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapState, mapGetters } from 'vuex';
 import { getDezenasMega, getDezenasTexto } from '../../js/data/jogos';
 import ResultadoDezenas from '../../components/loteria/ResultadoDezenas';
 
@@ -71,6 +74,7 @@ export default {
   },
   methods: {
     ...mapActions('people', ['ActionGetParticipanteForId', 'ActionAddDezenas']),
+    ...mapGetters('people', ['palpitou']),
     submit() {
       if (!this.participante.id) {
         this.$root.$emit('Notification::show', {
@@ -110,6 +114,12 @@ export default {
         this.toggle_dezenas.map(e => e + 1)
       );
       return this.selected_dezenas;
+    },
+    deixaAlterar() {
+      if (this.bolao.inativo && this.palpitou) {
+        return false;
+      }
+      return true;
     }
   },
   mounted() {
