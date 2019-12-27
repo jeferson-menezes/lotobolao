@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col nu"></div>
+            <div class="col bd">bradesco</div>
+            <div class="col ot">Outros</div>
+        </div>
+    </div>
+
+    <script>
+        const nu = [
+            { nome: "Fagner Alves da Costa", valor: "33,75" },
+            { nome: "Andreia Cristina de Oliveira Bicalho", valor: "33,75" },
+            { nome: "Daniel Victor Amaral Ceretti", valor: "33,75" },
+            { nome: "André Luiz dos Santos Silva", valor: "33,75" },
+            { nome: "Aécio Souza de Oliveira", valor: "33,75" },
+            { nome: "Juliana Carolina Silva", valor: "33,75" }
+        ]
+        const bd = [
+            { nome: "Eduardo Romero goes", valor: "67,5" },
+            { nome: "MarioSimoes Filho", valor: "33,75" },
+            { nome: "FAbiana Cavalcante", valor: "33,75" },
+            { nome: "Larissa Perez Germano", valor: "33,75" },
+            { nome: "Diogo N Alves", valor: "33,75" }
+        ]
+
+        const ot = [
+            { nome: "Roberto da Silva Lima", valor: "33,75" },
+            { nome: "Alex Tome", valor: "45,75" }
+        ]
+
+        const montaTabela = (arr, titulo) => {
+           return `
+                <table class="table table-dark">
+                    <thead>
+                      <tr>
+                        <th scope="col">
+                            ${titulo}
+                        </th>
+                      </tr>
+                      <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Valor</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        ${
+                            arr.map(e => `
+                                            <tr>
+                                                <th>${e.nome}</th>
+                                                <td>${e.valor}</td>
+                                            </tr>
+                                        `
+                            ).join('')
+                        }
+                    </tbody>
+                </table>
+            `
+        }
+
+        document.querySelector('.nu').innerHTML = montaTabela(nu, "Nu Bank");
+        document.querySelector('.bd').innerHTML = montaTabela(bd, "Bradesco");
+        document.querySelector('.ot').innerHTML = montaTabela(ot, "Outros");
+    </script>
+</body>
+
+</html>
