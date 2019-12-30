@@ -14,9 +14,12 @@
 <body>
     <div class="container">
         <div class="row">
+            <div class="col tl"></div>
+        </div>
+        <div class="row">
             <div class="col nu"></div>
-            <div class="col bd">bradesco</div>
-            <div class="col ot">Outros</div>
+            <div class="col bd"></div>
+            <div class="col ot"></div>
         </div>
     </div>
 
@@ -27,23 +30,40 @@
             { nome: "Daniel Victor Amaral Ceretti", valor: "33,75" },
             { nome: "André Luiz dos Santos Silva", valor: "33,75" },
             { nome: "Aécio Souza de Oliveira", valor: "33,75" },
-            { nome: "Juliana Carolina Silva", valor: "33,75" }
+            { nome: "Juliana Carolina Silva", valor: "33,75" },
+            { nome: "Renato Hernandez Alexandre", valor: "33,75" },
+            { nome: "Amanda Felix", valor: "33,75" },
+            { nome: "Wagner Alezandre Salamanca", valor: "33,75" },
+            { nome: "Tiago do Carmo Lopes", valor: "33,75" }
         ]
+
         const bd = [
-            { nome: "Eduardo Romero goes", valor: "67,5" },
-            { nome: "MarioSimoes Filho", valor: "33,75" },
-            { nome: "FAbiana Cavalcante", valor: "33,75" },
+            { nome: "Fabiana Cavalcante", valor: "33,75" },
+            { nome: "Mario Simões Filho", valor: "67,5" },
             { nome: "Larissa Perez Germano", valor: "33,75" },
-            { nome: "Diogo N Alves", valor: "33,75" }
+            { nome: "Bruna Carolina A Chiaretti", valor: "33,75" },
+            { nome: "Ana Paula de Souza Zane", valor: "33,75" },
+            { nome: "Eduardo Romero goes", valor: "67,5" },
+            { nome: "Luiz Carlos Goes(pai o du)", valor: "0,00" },
+            { nome: "Diogo N Alves", valor: "33,75" },
+            { nome: "Gian Carlos Covre", valor: "33,75" },
+            { nome: "Thiago do NAscimento", valor: "33,75" }
+
         ]
 
         const ot = [
-            { nome: "Roberto da Silva Lima", valor: "33,75" },
-            { nome: "Alex Tome", valor: "45,75" }
+            { nome: "Roberto da Silva Lima (Boleto Nu)", valor: "33,75" },
+            { nome: "Alex Tome (Dinheiro)", valor: "45,75" },
+            { nome: "Vilma CArbonari", valor: "33,75" },
+            { nome: "China", valor: "33,75" },
+            { nome: "Jeferson Menezes", valor: "33,75" },
+            { nome: "Luiz Sergio Paes Pontes", valor: "33,75" }
         ]
 
+        let num = 0;
         const montaTabela = (arr, titulo) => {
-           return `
+            arr.sort((a, b) => a.nome == b.nome ? 0 : a.nome < b.nome ? -1 : 1);
+            return `
                 <table class="table table-dark">
                     <thead>
                       <tr>
@@ -58,14 +78,15 @@
                     </thead>
                     <tbody>
                         ${
-                            arr.map(e => `
-                                            <tr>
-                                                <th>${e.nome}</th>
-                                                <td>${e.valor}</td>
-                                            </tr>
-                                        `
-                            ).join('')
-                        }
+                arr.map(e => {
+                    num++
+                    return `
+                            <tr>
+                                <th>${e.nome}</th>
+                                <td>${e.valor}</td>
+                                </tr>
+                        `}
+                ).join('')}
                     </tbody>
                 </table>
             `
@@ -74,6 +95,8 @@
         document.querySelector('.nu').innerHTML = montaTabela(nu, "Nu Bank");
         document.querySelector('.bd').innerHTML = montaTabela(bd, "Bradesco");
         document.querySelector('.ot').innerHTML = montaTabela(ot, "Outros");
+        document.querySelector('.tl').innerHTML = `  <div class="row">
+    <div class="col-sm"><div class="card w-100"><div class="card-title"><h5 class="card-title">${num}</h5></div></dv></div></div>`;
     </script>
 </body>
 
